@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.logicasinapsis.algoritmos;
+package logicasinapsis.algoritmos;
 
-import com.logicasinapsis.estructuras.Grafo;
-import com.logicasinapsis.modelo.Neurona;
+import logicasinapsis.estructuras.Grafo;
+import logicasinapsis.modelo.Neurona;
 
 /**
  * Clase encargada de analizar la resiliencia y conectividad de la red.

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.logicasinapsis.modelo;
+package logicasinapsis.modelo;
 
 /**
  * Representa la conexión (arista) entre dos neuronas.
@@ -10,7 +10,7 @@ package com.logicasinapsis.modelo;
 public class Sinapsis {
     private Neurona destino;
     private double distancia; // d en la fórmula 
-    private String idNeurotransmisor; // Para buscar en la Hash Table 
+    private String idNeurotransmisor; // Para buscar en la Hash Table \r
     private double k; // Factor de eficiencia
 
     public Sinapsis(Neurona destino, double distancia, String idNeurotransmisor, double k) {
@@ -26,7 +26,6 @@ public class Sinapsis {
      * @return El peso calculado para el algoritmo de Dijkstra.
      */
     public double calcularPeso(double v) {
-        // Implementación de la fórmula del requerimiento E 
         return this.distancia / (v * this.k);
     }
 
@@ -42,4 +41,9 @@ public class Sinapsis {
 
     public double getK() { return k; }
     public void setK(double k) { this.k = k; }
+
+    @Override
+    public String toString() {
+        return " -> " + destino.getId() + " (d=" + distancia + ", NT=" + idNeurotransmisor + ", k=" + k + ")";
+    }
 }

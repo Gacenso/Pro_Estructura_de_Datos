@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.logicasinapsis.gui;
+package logicasinapsis.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import com.logicasinapsis.estructuras.Grafo;
-import com.logicasinapsis.estructuras.HashTable;
+import logicasinapsis.estructuras.Grafo;
+import logicasinapsis.estructuras.HashTable;
 
 /**
  * Interfaz gráfica de usuario principal.
