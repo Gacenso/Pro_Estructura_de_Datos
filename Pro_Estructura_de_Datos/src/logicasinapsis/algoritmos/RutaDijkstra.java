@@ -18,7 +18,7 @@ public class RutaDijkstra {
     /**
      * Ejecuta el análisis completo de Dijkstra desde un nodo origen.
      * Muestra en consola la distancia mínima hacia todos los nodos y detecta zonas aisladas.
-     * * @param red El grafo con la red neuronal y sus sinapsis.
+     * @param red El grafo con la red neuronal y sus sinapsis.
      * @param diccionario La HashTable con las velocidades de los neurotransmisores.
      * @param idInicio El ID de la neurona desde donde inicia el estímulo.
      */
@@ -41,7 +41,7 @@ public class RutaDijkstra {
         boolean[] visitados = new boolean[totalNodos];
         int[] predecesores = new int[totalNodos];
 
-        // 1. PASO DE INICIALIZACIÓN
+        //PASO DE INICIALIZACIÓN
         for (int i = 0; i < totalNodos; i++) {
             distancias[i] = INFINITO;
             visitados[i] = false;
@@ -51,7 +51,7 @@ public class RutaDijkstra {
         // La distancia del nodo inicial a sí mismo es siempre 0
         distancias[indiceInicio] = 0;
 
-        // 2. BUCLE PRINCIPAL DE DIJKSTRA
+        //BUCLE PRINCIPAL DE DIJKSTRA
         for (int i = 0; i < totalNodos - 1; i++) {
             // Buscamos el nodo no visitado con la distancia acumulada más pequeña
             int u = encontrarMinimaDistancia(distancias, visitados, totalNodos);
@@ -91,7 +91,6 @@ public class RutaDijkstra {
 
     /**
      * Busca de forma secuencial el índice del arreglo con la menor distancia registrada.
-     * Sustituye de manera limpia y eficiente la PriorityQueue de java.util.
      */
     private int encontrarMinimaDistancia(double[] distancias, boolean[] visitados, int totalNodos) {
         double min = INFINITO;
