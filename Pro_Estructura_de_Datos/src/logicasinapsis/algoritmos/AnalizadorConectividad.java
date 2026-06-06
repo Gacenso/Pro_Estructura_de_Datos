@@ -18,123 +18,29 @@ public class AnalizadorConectividad {
      * @param idFuente ID de la neurona donde inicia el estímulo.
      * @return Arreglo o estructura propia con las neuronas aisladas.
      */
-   public String[] detectarZonasAisladas(Grafo red, String idFuente) {
-        int totalNodos = red.getCantidadNodos();
-        if (totalNodos == 0) return new String[0];
-
-        int indiceFuente = -1;
-        for (int i = 0; i < totalNodos; i++) {
-            if (red.getNeuronaEnPosicion(i).getId().equals(idFuente)) {
-                indiceFuente = i;
-                break;
-            }
-        }
-
-        if (indiceFuente == -1) return new String[0];
-
-        // Implementación de BFS manual usando arreglos como cola fija
-        boolean[] visitados = new boolean[totalNodos];
-        int[] cola = new int[totalNodos];
-        int inicioCola = 0;
-        int finCola = 0;
-
-        visitados[indiceFuente] = true;
-        cola[finCola++] = indiceFuente;
-
-        while (inicioCola < finCola) {
-            int u = cola[inicioCola++];
-            Grafo.ListaSinapsis.NodoSinapsis actual = red.getPrimerNodoSinapsis(u);
-            while (actual != null) {
-                String idDestino = actual.sinapsis.getDestino().getId();
-                int vIndice = -1;
-                for (int i = 0; i < totalNodos; i++) {
-                    if (red.getNeuronaEnPosicion(i).getId().equals(idDestino)) {
-                        vIndice = i;
-                        break;
-                    }
-                }
-                if (vIndice != -1 && !visitados[vIndice]) {
-                    visitados[vIndice] = true;
-                    cola[finCola++] = vIndice;
-                }
-                actual = actual.siguiente;
-            }
-        }
-
-        // Contar cuántas quedaron aisladas (visitados == false)
-        int contadorAisladas = 0;
-        for (int i = 0; i < totalNodos; i++) {
-            if (!visitados[i]) contadorAisladas++;
-        }
-
-        String[] aisladas = new String[contadorAisladas];
-        int idx = 0;
-        for (int i = 0; i < totalNodos; i++) {
-            if (!visitados[i]) {
-                aisladas[idx++] = red.getNeuronaEnPosicion(i).getId();
-            }
-        }
-        return aisladas;
+    public String[] detectarZonasAisladas(Grafo red, String idFuente) {
+        // 1. Ejecutar un recorrido BFS o DFS desde idFuente.
+        // 2. Marcar todos los nodos visitados.
+        // 3. Identificar los nodos no visitados como "zonas aisladas".
+        return null;
     }
 
+    /**
+     * Verifica si la red es fuertemente conexa (Requerimiento B).
+     * @param red El grafo actual.
+     * @return true si todas las neuronas pueden comunicarse entre sí.
+     */
     public boolean esFuertementeConexa(Grafo red) {
-        int totalNodos = red.getCantidadNodos();
-        if (totalNodos <= 1) return true;
-
-        // Para que sea fuertemente conexo, un BFS desde CUALQUIER nodo debe alcanzar a TODOS los demás.
-        // Hacemos una validación simplificada pero efectiva para el entregable.
-        for (int i = 0; i < totalNodos; i++) {
-            boolean[] visitados = new boolean[totalNodos];
-            int[] cola = new int[totalNodos];
-            int inicio = 0, fin = 0;
-
-            visitados[i] = true;
-            cola[fin++] = i;
-
-            while (inicio < fin) {
-                int u = cola[inicio++];
-                Grafo.ListaSinapsis.NodoSinapsis actual = red.getPrimerNodoSinapsis(u);
-                while (actual != null) {
-                    String destId = actual.sinapsis.getDestino().getId();
-                    int vIdx = -1;
-                    for (int k = 0; k < totalNodos; k++) {
-                        if (red.getNeuronaEnPosicion(k).getId().equals(destId)) { vIdx = k; break; }
-                    }
-                    if (vIdx != -1 && !visitados[vIdx]) {
-                        visitados[vIdx] = true;
-                        cola[fin++] = vIdx;
-                    }
-                    actual = actual.siguiente;
-                }
-            }
-            // Si desde este nodo i no se llegó a todos, la red no es fuertemente conexa
-            for (boolean v : visitados) {
-                if (!v) return false;
-            }
-        }
-        return true;
+        // Implementación para verificar fragmentación tras una lesión.
+        return false;
     }
 
+    /**
+     * Simula el deterioro multiplicando k por 1.2 en todas las sinapsis (Requerimiento F).
+     * @param red El grafo a modificar.
+     */
     public void simularFatigaCognitiva(Grafo red) {
-        if (red == null) return;
-
-        int totalNodos = red.getCantidadNodos();
-        // Recorremos cada neurona del arreglo principal
-        for (int i = 0; i < totalNodos; i++) {
-            Grafo.ListaSinapsis.NodoSinapsis actual = red.getPrimerNodoSinapsis(i);
-            
-            // Recorremos la lista enlazada de conexiones de esa neurona
-            while (actual != null) {
-                double kActual = actual.sinapsis.getK();
-                
-                // Aplicamos la fórmula matemática exacta de la rúbrica
-                double nuevoK = kActual * 1.2;
-                
-                // Guardamos el nuevo coeficiente alterado en caliente
-                actual.sinapsis.setK(nuevoK);
-                
-                actual = actual.siguiente; // Avanzar al siguiente enlace
-            }
-        }
+        // Recorrer el grafo y actualizar los valores de k (coeficiente_eficiencia).
+        // Esto puede causar que rutas previas se vuelvan inaccesibles.
     }
 }
