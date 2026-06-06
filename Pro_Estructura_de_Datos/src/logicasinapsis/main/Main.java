@@ -4,7 +4,7 @@
  */
 package logicasinapsis.main;
 
-import logicasinapsis.gui.VentanaPrincipal;
+import logicasinapsis.gui.Interfazprincipal;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -14,19 +14,28 @@ import javax.swing.UIManager;
 public class Main {
 
     public static void main(String[] args) {
-        // 1. Opcional: Configurar el LookAndFeel para que la GUI se vea moderna
+       // 1. ¡OBLIGATORIO PARA GRAPHSTREAM! Configurar el motor gráfico antes de iniciar la ventana
+        System.setProperty("org.graphstream.ui", "swing");
+
+        // 2. Configurar el LookAndFeel para que la interfaz se vea moderna
         configurarApariencia();
 
-        // 2. Iniciar la interfaz gráfica en el hilo de despacho de eventos (EDT)
+        // 3. Iniciar tu interfaz gráfica real en su hilo seguro (EDT)
         SwingUtilities.invokeLater(() -> {
             try {
-                // Instanciamos la ventana principal que ya contiene el Grafo y la HashTable
-                VentanaPrincipal app = new VentanaPrincipal();
-                app.setVisible(true);
+                // Instanciamos tu JFrame real
+                Interfazprincipal ventana = new Interfazprincipal();
                 
-                System.out.println("SynapseLogic: Sistema iniciado correctamente.");
+                // Centrar la ventana automáticamente en el medio de la pantalla
+                ventana.setLocationRelativeTo(null);
+                
+                // Hacer visible la ventana
+                ventana.setVisible(true);
+                
+                System.out.println("SynapseLogic: Interfazprincipal iniciada con éxito.");
             } catch (Exception e) {
-                System.err.println("Error crítico al iniciar la aplicación: " + e.getMessage());
+                System.err.println("Error crítico al inicializar la interfaz gráfica: " + e.getMessage());
+                e.printStackTrace();
             }
         });
     }
@@ -38,7 +47,7 @@ public class Main {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
-            // Si falla, se queda con el estilo Java por defecto
+            // Si falla, se queda con el estilo Java por defecto o Metal
         }
     }
 }
