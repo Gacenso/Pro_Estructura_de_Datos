@@ -134,7 +134,7 @@ public class Interfazprincipal extends javax.swing.JFrame {
         DFS.setText("DFS");
         DFS.addActionListener(this::DFSActionPerformed);
 
-        jLabel4.setText("Defectar Zona Aislada:");
+        jLabel4.setText("Detectar Zona Aislada:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

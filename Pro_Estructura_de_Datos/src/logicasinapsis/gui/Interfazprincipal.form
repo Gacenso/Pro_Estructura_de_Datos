@@ -219,7 +219,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Defectar Zona Aislada:"/>
+        <Property name="text" type="java.lang.String" value="Detectar Zona Aislada:"/>
       </Properties>
     </Component>
   </SubComponents>
