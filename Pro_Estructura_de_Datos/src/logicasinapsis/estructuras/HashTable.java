@@ -37,6 +37,7 @@ public class HashTable {
 
     /**
      * Función de dispersión para convertir la llave en un índice.
+     * Se seleccionó el número 31 para la función hash debido a que es un número primo, y por el hecho de que es un equilibrio perfecto entre números primos muy grandes y muy pequeños que permite un rendimiento óptimo.
      */
     private int hash(String llave) {
         int hashAcumulado = 0;
@@ -97,6 +98,10 @@ public class HashTable {
         return null; // No se encuentra en la tabla
     }
 
+    /**
+     * Obtiene la cantidad de elementos insertados actualmente en la tabla.
+     * @return Número de neurotransmisores almacenados.
+     */
     public int getTamano() {
         return tamano;
     }

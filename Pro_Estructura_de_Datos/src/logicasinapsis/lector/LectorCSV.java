@@ -19,6 +19,8 @@ public class LectorCSV {
 
     /**
      * Carga el diccionario de neurotransmisores en la tabla hash.
+     * @param rutaArchivo   Ruta del archivo CSV que contiene los neurotransmisores.
+     * @param tabla         Instancia del HashTable donde se almacenarán los neurotransmisores.   
      */
     public void cargarDiccionario(String rutaArchivo, HashTable tabla) {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {

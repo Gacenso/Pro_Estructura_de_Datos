@@ -76,7 +76,12 @@ public class AnalizadorConectividad {
         }
         return aisladas;
     }
-
+   
+    /**
+     * Valida si la red es "Fuertemente Conexa".
+     * @param red Grafo de la red sináptica.
+     * @return True si la red es fuertemente conexa / False en caso contrario.
+     */
     public boolean esFuertementeConexa(Grafo red) {
         int totalNodos = red.getCantidadNodos();
         if (totalNodos <= 1) return true;
@@ -115,6 +120,11 @@ public class AnalizadorConectividad {
         return true;
     }
 
+    /**
+     * Simula un proceso de degradación sináptica afectando el factor de eficiencia (k).
+     * Incrementa el valor de 'k' en un 20% en todas las conexiones de la red.
+     * @param red Grafo de la red sináptica a modificar.
+     */
     public void simularFatigaCognitiva(Grafo red) {
         if (red == null) return;
 
@@ -136,5 +146,5 @@ public class AnalizadorConectividad {
                 actual = actual.siguiente; // Avanzar al siguiente enlace
             }
         }
-    }
+    }  
 }

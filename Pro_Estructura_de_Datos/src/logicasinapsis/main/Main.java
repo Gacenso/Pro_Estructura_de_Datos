@@ -10,9 +10,16 @@ import javax.swing.UIManager;
 
 /**
  * Punto de entrada principal del simulador SynapseLogic.
+ * Clase encargada de inicializar la configuración visual
+ * necesitada para Graphstream y la UI.
  */
 public class Main {
-
+    
+    /**
+     * Método principal del programa.
+     * Configura el renderizado de GraphStream, estableciendo
+     * la ventana principal del programa.
+     */
     public static void main(String[] args) {
        // 1. ¡OBLIGATORIO PARA GRAPHSTREAM! Configurar el motor gráfico antes de iniciar la ventana
         System.setProperty("org.graphstream.ui", "swing");

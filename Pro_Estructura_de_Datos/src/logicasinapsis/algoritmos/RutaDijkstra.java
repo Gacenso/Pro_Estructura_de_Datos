@@ -12,6 +12,13 @@ public class RutaDijkstra {
 
     private static final double INFINITO = Double.MAX_VALUE;
 
+    /**
+     * Ejecuta Dijkstra para encontrar las rutas más rápidas de transmisión.
+     * @param red           Grafo dirigido que representa la red sináptica.
+     * @param diccionario   Tabla Hash que contiene los neurotransmisores y sus velocidades.
+     * @param idInicio      Id de la neurona origen del estímulo.
+     * @return String con el diagnóstico y desglose de rutas.
+     */
     public String analizarRed(Grafo red, HashTable diccionario, String idInicio) {
         int totalNodos = red.getCantidadNodos();
         if (totalNodos == 0) {
@@ -71,6 +78,14 @@ public class RutaDijkstra {
         return construirReporteTexto(red, distancias, predecesores, idInicio);
     }
 
+    /**
+     * Construye un reporte en String con los resultados del diagnóstico.
+     * @param red           Grafo de la red neuronal.
+     * @param distancias    Arreglo con los tiempos mínimos calculados hacia cada nodo.
+     * @param predecesores  Arreglo con los índices de los nodos previos en la ruta óptima.
+     * @param idInicio      Id de la neurona donde inició el estímulo.
+     * @return Reporte estructurado
+     */
     private String construirReporteTexto(Grafo red, double[] distancias, int[] predecesores, String idInicio) {
         StringBuilder sb = new StringBuilder();
         int totalNodos = red.getCantidadNodos();
@@ -150,6 +165,10 @@ public class RutaDijkstra {
 
     /**
      * Reconstruye de forma recursiva la secuencia exacta de nodos del camino óptimo.
+     * @param red           Grafo de la red neuronal.
+     * @param predecesores  Arreglo con la información de los nodos previos.
+     * @param indiceNodo    Índice numérico del nodo destino actual.
+     * @return String con la ruta formateada.
      */
     private String obtenerRutaComoTexto(Grafo red, int[] predecesores, int indiceNodo) {
         if (predecesores[indiceNodo] == -1) {
@@ -158,6 +177,13 @@ public class RutaDijkstra {
         return obtenerRutaComoTexto(red, predecesores, predecesores[indiceNodo]) + " -> " + red.getNeuronaEnPosicion(indiceNodo).getId();
     }
 
+    /**
+     * Busca el vértice no visitado que tiene la distancia mínima acumulada desde el origen.
+     * @param distancias    Arreglo con las distancias actuales calculadas.
+     * @param visitados     Arreglo booleano que indica cuales nodos fueron procesados.
+     * @param totalNodos    Cantidad total de nodos en la red.
+     * @return Índice del nodo con la menor distancia, o -1 si no existe nodo alcanzable.
+     */
     private int encontrarMinimaDistancia(double[] distancias, boolean[] visitados, int totalNodos) {
         double min = INFINITO;
         int indiceMinimo = -1;
@@ -170,6 +196,12 @@ public class RutaDijkstra {
         return indiceMinimo;
     }
 
+    /**
+     * Localiza el índice numérico de una neurona en el grafo.
+     * @param red   Grafo donde se realiza la búsqueda.
+     * @param id    Id de la neurona
+     * @return Índice en el arreglo del grafo, o -1 si no existe.
+     */
     private int encontrarIndicePorId(Grafo red, String id) {
         if (id == null) return -1;
         int totalNodos = red.getCantidadNodos();

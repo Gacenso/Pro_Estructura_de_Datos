@@ -10,19 +10,34 @@ package logicasinapsis.modelo;
 public class Neurona {
     private String id; // Puede ser String o Integer según el dataset 
 
+    /**
+     * Crea una nueva instancia de Neurona.
+     * @param id Identificador
+     */
     public Neurona(String id) {
         this.id = id;
     }
 
-    // Getters y Setters
+    /**
+     * Obtiene el id de la neurona.
+     * @return id como String.
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Establece el id de la neurona.
+     * @param id nuevo id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Devuelve el String de la neurona.
+     * @return String con identificadores
+     */
     @Override
     public String toString() {
         return "Neurona{" + "id='" + id + '\'' + '}';

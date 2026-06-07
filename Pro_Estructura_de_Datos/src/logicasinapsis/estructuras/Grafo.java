@@ -16,7 +16,9 @@ public class Grafo {
     private int cantidadNodos;
     private int capacidad;
 
-    // Clase interna para el nodo principal del arreglo
+    /**
+     * Clase interna para el nodo principal del arreglo.
+     */
     private class NodoGrafo {
         Neurona neurona;
         ListaSinapsis adyacentes;
@@ -27,10 +29,14 @@ public class Grafo {
         }
     }
 
-    // ¡CAMBIO IMPORTANTE! Ahora es public para que la interfaz pueda iterarla
+    /**
+     * Implementación de una lista enlazada simple para gestionar las adyacencias.
+     */
     public class ListaSinapsis {
         
-        // ¡CAMBIO IMPORTANTE! Ahora es public y sus variables también
+        /**
+         * Nodo individual de la lista.
+         */
         public class NodoSinapsis {
             public Sinapsis sinapsis;
             public NodoSinapsis siguiente;
@@ -43,6 +49,10 @@ public class Grafo {
 
         private NodoSinapsis cabeza;
 
+        /**
+         * Agrega una nueva sinapsis al final de la lista de adyacencia.
+         * @param s La conexión sináptica a insertar.
+         */
         public void agregar(Sinapsis s) {
             NodoSinapsis nuevo = new NodoSinapsis(s);
             if (cabeza == null) {
@@ -56,6 +66,11 @@ public class Grafo {
             }
         }
 
+        /**
+         * Recorre la lista y elimina cualquier sinapsis que apunte a la
+         * neurona destino especificada.
+         * @param idDestino id de la neurona que se eliminará.
+         */
         public void removerConexionesA(String idDestino) {
             while (cabeza != null && cabeza.sinapsis.getDestino().getId().equals(idDestino)) {
                 cabeza = cabeza.siguiente;
@@ -72,17 +87,30 @@ public class Grafo {
             }
         }
 
+        /**
+         * Obtiene el primero nodo de la lista enlazada.
+         * @return Nodo inicial de la lista.
+         */
         public NodoSinapsis getCabeza() {
             return cabeza;
         }
     }
 
+    /**
+     * Crea un nuevo grafo con la capacidad inicial dada.
+     * @param capacidadInicial El tamaño inicial del arreglo de vértices.
+     */
     public Grafo(int capacidadInicial) {
         this.nodos = new NodoGrafo[capacidadInicial];
         this.cantidadNodos = 0;
         this.capacidad = capacidadInicial;
     }
 
+    /**
+     * Busca una neurona dentro del grafo utilizando su id.
+     * @param id id de la neurona que se busca.
+     * @return Neurona buscada o null si no existe.
+     */
     public Neurona buscarNeurona(String id) {
         if (id == null) return null;
         for (int i = 0; i < cantidadNodos; i++) {
@@ -93,6 +121,10 @@ public class Grafo {
         return null;
     }
 
+    /**
+     * Agrega una nueva neurona al grafo.
+     * @param n Neurona a insertart. Se ignorara si es null o ya existente.
+     */
     public void agregarNeurona(Neurona n) {
         if (n == null || buscarNeurona(n.getId()) != null) return;
         
@@ -109,6 +141,14 @@ public class Grafo {
         cantidadNodos++;
     }
 
+    /**
+     * Crea una conexión entre dos neuronas en el grafo.
+     * @param idOrigen          id de la neurona origen.
+     * @param idDestino         id de la neurona destino.
+     * @param distancia         Distancia de la conexión.
+     * @param neurotransmisor   Código del neurotransmisor.
+     * @param k                 Coeficiente de eificiencia.
+     */
     public void conectar(String idOrigen, String idDestino, double distancia, String neurotransmisor, double k) {
         NodoGrafo nodoOrigen = null;
         Neurona neuronaDestino = null;
@@ -128,6 +168,10 @@ public class Grafo {
         }
     }
 
+    /**
+     * Elimina una neurona del grafo y todas las sinapsis asociadas.
+     * @param id id de la neurona a eliminar.
+     */
     public void eliminarNeurona(String id) {
         if (id == null) return;
         int indiceEncontrado = -1;
@@ -155,14 +199,20 @@ public class Grafo {
         cantidadNodos--;
     }
 
+    /**
+     * Obtiene la cantidad actual de neuronas en el grafo.
+     * @return La cantidad de nodos activos.
+     */
     public int getCantidadNodos() {
         return cantidadNodos;
     }
 
-    // ==========================================================
-    // MÉTODOS AÑADIDOS PARA LA INTERFAZ GRÁFICA Y ALGORITMOS
-    // ==========================================================
-
+    /**
+     * Obtiene una neurona basándose en su índice físico dentro 
+     * del arreglo interno.
+     * @param indice La posición de la neurona en el arreglo.
+     * @return La neurona en dicha posición, o null si no se encuentra
+     */
     public Neurona getNeuronaEnPosicion(int indice) {
         if (indice >= 0 && indice < cantidadNodos) {
             return nodos[indice].neurona;
@@ -170,6 +220,11 @@ public class Grafo {
         return null;
     }
 
+    /**
+     * Obtiene el primer nodo de la lista de adyacencia.
+     * @param indice La posición de la neurona origen en el arreglo.
+     * @return La cabeza de la lista de conexiones, o null si no se encuentra.
+     */
     public ListaSinapsis.NodoSinapsis getPrimerNodoSinapsis(int indice) {
         if (indice >= 0 && indice < cantidadNodos) {
             return nodos[indice].adyacentes.getCabeza();
@@ -177,6 +232,12 @@ public class Grafo {
         return null;
     }
 
+    /**
+     * Busca la posición física de una neurona dentro del arreglo utilizando
+     * el id.
+     * @param id id de la neurona
+     * @return Índice en el arreglo, o -1 si no existe.
+     */
     public int getIndicePorId(String id) {
         for (int i = 0; i < cantidadNodos; i++) {
             if (nodos[i].neurona.getId().equals(id)) {
